@@ -1,0 +1,19 @@
+.header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 6.4rem;
+    font-size: 1.4rem; 
+    padding: var(--global-wrap);
+    border-bottom: 1px solid rgba(255,255,255, 0.1);;
+
+    &--score {
+        padding: 0.8rem;
+        font-size: 1.4rem;
+    }
+
+    &--arrow {
+        width: 1.2rem;
+        transform: rotate(-90deg);
+    }
+}
