@@ -1,0 +1,15 @@
+.display{
+    padding: 3rem;
+}
+
+svg.LOST {
+    fill: rgb(12, 11, 11);
+}
+
+svg.WON {
+    fill: #fff;
+}
+
+svg.WON {
+    transition: fill 0.5s ;
+}

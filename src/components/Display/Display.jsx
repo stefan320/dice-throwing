@@ -1,11 +1,16 @@
 import React from 'react';
 
-import { ReactComponent as Dice } from '../../assets/dices/dice5.svg';
+import './display.styles.scss';
+
+import dices from '../../assets/dices/dices.svg';
+
+
 
 const Display = (props) => (
     <div className="display">
-        <Dice />
-
+        <svg className={props.result}>
+            <use href={`${dices}#dice${props.sideGenerated ? props.sideGenerated : props.sideSelected} `}></use>
+        </svg>
         {/* <img src={
             props.dices[`dice${props.sideGenerated}.svg`]
         }
