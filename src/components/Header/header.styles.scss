@@ -2,9 +2,9 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 6.4rem;
+    height: var(--header-height);
     font-size: 1.4rem; 
-    padding: var(--global-wrap);
+    padding: var(--global-wraper);
     border-bottom: 1px solid rgba(255,255,255, 0.1);;
 
     &--score {

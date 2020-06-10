@@ -1,19 +1,22 @@
 import React from 'react';
 import SideSelector from "../SideSelector/SideSelector"
+import BetController from "../BetController/BetController"
+
+import './gameController.styles.scss';
+
 
 const GameController = (props) => (
     <div className="gameController">
-        <small>Tap to change selection</small>
-        <h1>{props.sideSelected}</h1>
+        <small className={"gameController--small"}>Tap to change selection</small>
         <SideSelector
             sideSelection={props.getSelectedSide}
             sideSelected={props.sideSelected}
         />
-        <input type="number"
-            onChange={props.betAmountHandler}
-            defaultValue={props.betAmount}
+        <BetController
+            betAmountHandler={props.betAmountHandler}
+            betAmount={props.betAmount}
         />
-        <button onClick={props.betHandler}>play</button>
+        <button className={"btn--default"} onClick={props.betHandler}>Roll the dice man</button>
     </div>
 );
 export default GameController;

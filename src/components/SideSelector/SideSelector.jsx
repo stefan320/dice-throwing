@@ -6,12 +6,10 @@ import './sideSelector.styles.scss';
 
 
 const sideSelector = (props) => {
-    console.log(props.sideSelected)
-
     return (
         <div className="sideSelector">
             {
-                [...Array(6)].map((index, side) => {
+                [1, 2, 3, 4, 5, 6].map((side) => {
                     return (
                         <svg key={side}
                             data-side={side}

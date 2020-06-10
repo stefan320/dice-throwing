@@ -1,15 +1,21 @@
 .display{
-    padding: 3rem;
+    text-align: center;
+    flex-grow :1;
+
+    &--svg{
+      height: 12.4rem;
+      width: 12.4rem;  
+    }
 }
 
-svg.LOST {
-    fill: rgb(12, 11, 11);
+svg.Loss {
+    fill: #000;
+}
+
+svg.WIN {
+    fill: #46FFBA;
 }
 
 svg.WON {
-    fill: #fff;
-}
-
-svg.WON {
-    transition: fill 0.5s ;
+    transition: fill .5s ;
 }

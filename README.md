@@ -1,3 +1,11 @@
+Project INFO
+
+1. App State lives in Cockpit.jsx
+2. Dices 1 - 6 were added to an SVG Sprite and can be found in src/assets/dices/dices.svg
+3. For better UX I added an input field to easily change the bet ammount to the desired value.
+4. Every Component Folder contains an SCSS file. However, Some of the styles are globally set from app.css
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -15,36 +15,52 @@ class Cockpit extends React.Component {
             credit: 0,
             currentPlayer: 'robouser',
             result: null,
-            sideGenerated: 0,
-            sideSelected: undefined,
-            betAmount: 2000
+            sideGenerated: null,
+            sideSelected: null,
+            betAmount: 2000,
+            winAmount: null
         }
     }
 
     betAmountHandler = (event) => {
-        this.setState({
-            betAmount: event.target.value
-        })
+        const type = event.target.closest(".bet--changer").dataset.type;
+        switch (type) {
+            case ("decrement"):
+                this.setState({ betAmount: this.state.betAmount - 1 })
+                break;
+            case ("increment"):
+                this.setState({ betAmount: this.state.betAmount + 1 })
+                break;
+            case ("manualChange"):
+                this.setState({ betAmount: parseInt(event.target.value) })
+                break;
+        }
     }
 
     betHandler = () => {
-        console.log("submission");
-        axios.post('http://localhost:3000/roll-dice', {
-            "betAmount": this.state.betAmount,
-            "username": this.state.currentPlayer,
-            "sideSelected": this.state.sideSelected
-        })
-            .then((response) => response.data)
-            .then(({ result, sideGenerated }) => {
-                this.setState({
-                    result,
-                    sideGenerated
-                })
+        this.state.betAmount >= 1 ?
+            axios.post('http://localhost:3000/roll-dice', {
+                "betAmount": this.state.betAmount,
+                "username": this.state.currentPlayer,
+                "sideSelected": this.state.sideSelected
             })
-            .then(() => this.fetchUserData(this.state.currentPlayer))
-            .catch((error) => {
-                console.log(error);
-            });
+                .then((response) => {
+                    return response.data
+                })
+                .then(({ result, sideGenerated }) => {
+                    const stateCopy = { ...this.state };
+                    const newResult = result === "WON" ? ["WIN", stateCopy.betAmount * 5] : ["Loss", null]
+                    this.setState({
+                        result: newResult[0],
+                        winAmount: newResult[1],
+                        sideGenerated
+                    })
+                })
+                .then(() => this.fetchUserData(this.state.currentPlayer))
+                .catch((error) => {
+                    console.log(error);
+                })
+            : this.setState({ betAmount: 1 });
     }
 
     fetchUserData = (player) => {
@@ -61,38 +77,29 @@ class Cockpit extends React.Component {
         this.setState({ sideSelected: selectedDice })
     }
 
-    shouldComponentUpdate(nextProps) {
-        if (nextProps.betAmount !== this.state.betAmount) {
-            return true
-        } else {
-            return false
-        }
-    }
-
     componentDidMount() {
         this.fetchUserData(this.state.currentPlayer);
     }
 
-
     render() {
+        const { state } = this;
         return (
             <div className="cockpit">
-                <Header credit={this.state.credit} />
+                <Header credit={state.credit} />
                 <Display
-                    result={this.state.result}
-                    sideGenerated={this.state.sideGenerated}
-                    sideSelected={this.state.sideSelected}
+                    result={state.result}
+                    sideGenerated={state.sideGenerated}
+                    sideSelected={state.sideSelected}
+                    winAmount={state.winAmount}
                 />
                 <div>
                     <GameController
-                        betAmount={this.state.betAmount}
+                        sideSelected={state.sideSelected}
+                        betAmount={state.betAmount}
                         betAmountHandler={this.betAmountHandler}
                         getSelectedSide={this.getSelectedSide}
                         betHandler={this.betHandler}
-                        sideSelected={this.state.sideSelected}
                     />
-
-                    <h2>{this.state.betAmount}</h2>
                 </div>
             </div>
         )
