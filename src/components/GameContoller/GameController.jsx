@@ -2,7 +2,7 @@ import React from 'react';
 import SideSelector from "../SideSelector/SideSelector"
 import BetController from "../BetController/BetController"
 
-import './gameController.styles.scss';
+import './GameController.styles.scss';
 
 
 const GameController = (props) => (
