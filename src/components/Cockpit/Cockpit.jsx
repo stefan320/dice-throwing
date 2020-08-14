@@ -34,7 +34,6 @@ class Cockpit extends React.Component {
             case ("manualChange"):
                 this.setState({ betAmount: parseInt(event.target.value) })
                 break;
-            default: false;
         }
     }
 
