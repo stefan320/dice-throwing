@@ -16,7 +16,7 @@ const GameController = (props) => (
             betAmountHandler={props.betAmountHandler}
             betAmount={props.betAmount}
         />
-        <button className={"btn--default"} onClick={props.betHandler}>Roll the dice man</button>
+        <button className={"btn--default"} onClick={props.betHandler}>Roll the dice</button>
     </div>
 );
 export default GameController;
